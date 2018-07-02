@@ -1,2 +1,2 @@
 # CompCamps2018
-mycompcampswebsite
+my comp camps website
