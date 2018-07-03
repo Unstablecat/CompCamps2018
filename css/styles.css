@@ -3,3 +3,24 @@
   display: block;
   margin: 0 auto;
 }
+body{
+  font-family: 'Acme', sans-serif;
+}
+h1{
+color: blue;
+
+}
+.nav-items{
+display: inline;
+padding: 10px;
+font-size: 48px;
+color: green;
+}
+.nav-link{
+  text decoration: none;
+color: black;
+}
+Size{
+  height:   200px;
+  width: 150px;
+}
