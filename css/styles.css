@@ -1,26 +1,61 @@
-.center{
+@keyframes navfade {
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+@-webkit-keyframes navfade {
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+
+.brettsface{
+  animation-name: navfade;
+  -webkit-animation-name: brettsface;
+  animation-duration: 5s;
+}
+.center {
   text-align: center;
   display: block;
   margin: 0 auto;
 }
-body{
-  font-family: 'Acme', sans-serif;
-}
-h1{
-color: blue;
 
+body {
+  font-family: 'Acme', sans-serif;
+  background-color: white;
+  margin: 0;
+  width: 100%;
 }
-.nav-items{
-display: inline;
-padding: 10px;
-font-size: 48px;
-color: green;
+
+h1 {
+  color: blue;
 }
-.nav-link{
-  text decoration: none;
-color: black;
+
+.nav-items {
+  display: inline;
+  padding: 10px;
+  font-size: 48px;
+  color: green;
 }
-Size{
-  height:   200px;
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+}
+.nav-link:hover{
+  color: red;
+}
+
+.Size {
+  height: 200px;
   width: 150px;
+}
+
+.nav {
+  margin: 0;
+  padding: 0;
+  background-color: blue;
+}
+
+.nav-container {
+  margin: 0;
+  padding: 25px 0;
 }
