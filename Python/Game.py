@@ -1,64 +1,56 @@
-import random
-import sys
+import os, pygame, random
 
-name = input("who dares to challege MITs?")
-Health = 40
-class MIT:
-    """MITs - The Enemies"""
-    def __init__(self, arg):
-        self.name = name
-        self.health = 10
+from settings import Settings
+from button import Button
+from mit import MIT
 
-        @property
-        def damage(self):
-            return random.randint(1,5)
+class Game():
+	def __init__(self):
+		self.background = pygame.image.load("photos/m.png")
+		self.enemy = None
+		self.mits = [
+			MIT("kaitlin"),
+		    MIT("travis"),
+		    MIT("rhiannon"),
+		    MIT("austin"),
+		    MIT("bennett"),
+		]
+		random.shuffle(self.mits)
+		self.font = pygame.font.SysFont('Comic Sans MS', 30)
 
-    def isAlive(self):
-        return self.health > 0
+		self.buttons =[
+			Button(0, Settings.height - 100, 100, 100, 'fight'),
+			Button(Settings.width - 100, Settings.height - 100, 100, 100, 'flee')
+		]
+
+	def loop(self, screen):
+		clock = pygame.time.Clock()
+
+		if not self.enemy:
+			self.enemy = self.mits.pop()
+			self.text = self.font.render(self.enemy.name, False, (0,0,0))
 
 
-    def attack(self):
-        damage = random.randit(0,11)
-        self.health -= damage
-        return damage
+		while True:
+			delta_t = clock.tick(Settings.frameRate)
 
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					return
 
+			screen.fill((0, 0, 0))
+			screen.blit(self.background, (0, 0))
 
-mits = [
-    MIT("Kaitlen"),
-    MIT("Travis"),
-    MIT("Rhiannon"),
-    MIT("Austin"),
-    MIT("Bennett"),
-]
+			screen.blit(self.enemy.img, (Settings.width - 150, 50))
+			pygame.draw.rect(screen, (0,0,0),(Settings.width - 150,150,100,10))
+			pygame.draw.rect(screen, (0,255,0),(Settings.width - 150,150, (self.enemy.health/20) * 100, 10))
+			screen.blit(self.text, (Settings.width - 150, 160))
 
-random.shuffle(mits)
+			for button in self.buttons:
+				pygame.draw.rect(screen, (0, 0, 255), (button.x, button.y, button.w, button.h))
+				screen.blit(button.text, (button.x, button.y))
 
-score = 0
+			pygame.display.flip()
 
-while len(mits) > 0:
-    mit = mits.pop()
-    print("a wild {} appears!".format(mit.name))
-    while mit.isAlive():
-        print("do you want to fight or flee")
-        if input("fight / Flee > ").lower() == "fight":
-            damage = mit.attack()
-            score += damage
-
-            print("you did {} damage")
-            if mit.isAlive():
-                damage = mit.damage
-                health -= damage
-                print("you did {} Damage".format(damage))
-        else:
-            Caught = random.randit(1,5) == 1
-            if not Caught:
-                print("you have escaped")
-                print("your score was {}".format(score))
-                sys.exit(0)
-            else:
-                print("you failed to flee")
-print("WOW! you have done it!")
-print("Good work{}!".format(name))
-print("the MITs have been removed from comp camp")
-print("your score is {}".format(score))
+	def quit(self):
+		pass
