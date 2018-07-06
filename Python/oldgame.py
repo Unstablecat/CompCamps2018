@@ -37,7 +37,7 @@ while len(mits) > 0:
     mit = mits.pop()
     print("a wild {} appears!".format(mit.name))
     while mit.isAlive():
-        print("you have {} health.".format(mit.name))
+        print("you have {} health.".format(Health))
         print("do you want to fight or flee")
         if input("fight / Flee > ").lower() == "fight":
             damage = mit.attack()
